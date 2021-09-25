@@ -1,11 +1,13 @@
 import data from './../menu.json';
+import articleTemp from './../templates/menu-card.hbs';
 
 const refs = {
 	themeSwitch: document.querySelector('#theme-switch-toggle'),
 	body: document.querySelector('body'),
+	menuContainer: document.querySelector('.js-menu'),
 };
 
-const { themeSwitch, body } = refs;
+const { themeSwitch, body, menuContainer } = refs;
 
 const Theme = {
 	LIGHT: 'light-theme',
@@ -30,3 +32,11 @@ function toggleTheme(e) {
 		localStorage.setItem('THEME', Theme.LIGHT);
 	}
 }
+
+function createMarkup(data) {
+	return data.map(articleTemp).join('');
+}
+
+const articlesMarkup = createMarkup(data);
+
+menuContainer.insertAdjacentHTML('afterbegin', articlesMarkup);
