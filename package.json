@@ -2,11 +2,15 @@
 	"name": "goit-js-hw-10",
 	"version": "1.0.0",
 	"description": "",
-	"main": "index.js",
+	"main": "./src/index.js",
 	"scripts": {
 		"dev": "parcel ./src/index.html",
-		"build": "parcel build ./src/index.html",
-		"deploy": "gh-pages -d ./dist"
+		"build": "parcel build ./src/index.html --public-url /goit-js-hw-10/",
+		"deploy": "gh-pages -d dist"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/NazarDonets/goit-js-hw-10.git"
 	},
 	"author": "",
 	"license": "ISC",
