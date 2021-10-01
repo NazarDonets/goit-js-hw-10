@@ -9,14 +9,24 @@ const refs = {
 	menuContainer: document.querySelector('.js-menu'),
 	buttonAsc: document.getElementById('sortAsc'),
 	buttonDesc: document.getElementById('sortDesc'),
+	notificationMsg: document.querySelector('.notification-container'),
 };
 
-const { themeSwitch, body, menuContainer, buttonAsc, buttonDesc } = refs;
+const {
+	themeSwitch,
+	body,
+	menuContainer,
+	buttonAsc,
+	buttonDesc,
+	notificationMsg,
+} = refs;
 
 const Theme = {
 	LIGHT: 'light-theme',
 	DARK: 'dark-theme',
 };
+
+console.log(notificationMsg);
 
 let activeTheme = localStorage.getItem('THEME');
 
@@ -69,4 +79,35 @@ buttonDesc.addEventListener('click', () => {
 	menuContainer.insertAdjacentHTML('afterbegin', articlesMarkup);
 });
 
-// arraySort(array, comparisonArgs);
+function showNotification() {
+	notificationMsg.classList.remove('visibility-hidden');
+}
+
+function hideNotification() {
+	notificationMsg.classList.add('visibility-hidden');
+}
+
+setTimeout(showNotification, 500);
+
+const hideNotifTimer = setTimeout(() => {
+	hideNotification();
+}, 4000);
+
+notificationMsg.addEventListener('mouseenter', (e) => {
+	if (e.target === notificationMsg) {
+		clearTimeout(hideNotifTimer);
+	}
+});
+
+notificationMsg.addEventListener('mouseout', () => {
+	setTimeout(() => {
+		hideNotification();
+	}, 2000);
+});
+
+body.addEventListener('click', (e) => {
+	if (e.target === notificationMsg) {
+		hideNotification();
+		clearTimeout(hideNotifTimer);
+	}
+});
